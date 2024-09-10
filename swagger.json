@@ -1,0 +1,70 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "JavaScript Code Compiler API",
+      "description": "A simple API to execute JavaScript code snippets."
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/execute": {
+        "post": {
+          "tags": ["Compiler"],
+          "summary": "Execute JavaScript code",
+          "description": "Accepts JavaScript code as input and returns the result or error.",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "code",
+              "in": "body",
+              "description": "JavaScript code to execute",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "const a = 5; const b = 10; a + b;"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Execution result or error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "result": {
+                    "type": "string",
+                    "example": "15"
+                  },
+                  "error": {
+                    "type": "string",
+                    "example": "ReferenceError: a is not defined"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string",
+                    "example": "No code provided."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
